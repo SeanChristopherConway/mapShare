@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- 
+     * Author:      Sean Conway
+     * Contact:     scconway8@gmail.com
+     * Website:     
+     * Twitter:     @scconway8
+    -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8">
+
+	<!-- <meta id="viewport" name="viewport" content="initial-scale=1.0; user-scalable=no;minimum-scale=1.0; maximum-scale=1.0" />-->
+	<meta name="viewport"  content="width=device-width, initial-scale=1.0, maximum-scale=1.0,minimum-scale=1.0, user-scalable=no">
+	<meta name="application-name" content="MapShare"> 
+    <title></title>
+
+    <link rel="stylesheet" href="/lib/Leaflet/leaflet.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="/lib/Leaflet/leaflet.ie.css" /><![endif]-->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/lib/FontAwesome/css/font-awesome.min.css">
+   	    <link rel="stylesheet" href="/lib/bootstrap/v2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/lib/leaflet-awesome-markers/leaflet.awesome-markers.css">
+	 <link rel="stylesheet" href="/lib/L.Control.Zoomslider.css"/>
+	 <link rel="stylesheet" href="/lib/Leaflet.Pancontrol-0.4.5/src/L.Control.Pan.css" />
+   <!-- Jquery UI -->
+   <link rel="stylesheet" href="/lib/menu/jquery.mmenu.all.css" />
+ <link rel="stylesheet" href="/lib/jquery-ui-1.10.4.custom.min.css" />
+
+    <!-- Marker Clusters -->
+   <link rel="stylesheet" href="/lib/Leaflet.markercluster/MarkerCluster.css" />
+   <link rel="stylesheet" href="/lib/Leaflet.markercluster/MarkerCluster.Default.css" />	
+   <link rel="stylesheet" href="/lib/mobile/jquery.mobile-1.4.3.min.css" />
+
+    <!-- our styles (last so it overrides other definitions) -->
+    <link rel="stylesheet" href="main.css" />
+    
+   
+  <!-- Leaflet Main /libraries -->
+	 <script>L_PREFER_CANVAS = true;</script>
+    <script src="/lib/Leaflet/leaflet-src.js" type="text/javascript"></script>
+	<script src="/lib/leaflet-omnivore.min.js" type="text/javascript"></script>
+	<script src="/lib/leaflet.ajax.js" type="text/javascript"></script>
+	<script src="/lib/OSMBuildings-Leaflet.js" type="text/javascript"></script>
+	<script src="/lib/jquery-1.10.2.min.js"></script> 
+	<script src="/lib/jquery-ui-1.10.4.custom.min.js"></script>
+
+     <!-- 
+
+	<script src="/lib/jquery.ui.touch-punch.min.js"></script>-->
+
+	
+	<script src="/lib/modernizr.custom.34049.js"></script>
+     <script src="/lib/bootstrap/v2/js/bootstrap.min.js"></script>
+	 <script src="/lib/bootstrap/js/bootstrap.combobox.js"></script>
+	<script src="/lib/spin.js"></script>
+	<script src="/lib/L.Terminator.js"></script>
+	<script src="/lib/algoTree/algoTree.js"></script>
+	 <script src="/socket.io/socket.io.js"></script>
+     
+    <script src="/lib/leaflet-awesome-markers/leaflet.awesome-markers.min.js"></script>
+
+      <!-- Navigation-->
+       <script src="/lib/menu/jquery.mmenu.min.all.js"></script>
+	   <script src="/lib/L.Control.Zoomslider.js"></script>
+	   
+	   <script src="/lib/Leaflet.Pancontrol-0.4.5/src/L.Control.Pan.js"></script>
+	   <script src="/lib/L.GeoSearch-master/src/js/l.control.geosearch.js"></script>
+	   <script src="/lib/L.GeoSearch-master/src/js/l.geosearch.provider.google.js"></script>
+  
+   <!-- Marker Clusters -->
+   <script src="/lib/Leaflet.markercluster/leaflet.markercluster-src.js"></script>
+
+<!-- Spatial libraries -->
+	<script src="mapFunctions.js" /type="text/javascript"></script>
+	<script src="map.js" /type="text/javascript"></script>
+
+	<script src="/lib/mobile/jquery.mobile-1.4.3.min.js"></script>
+  </head>
+  <body>
+   
+
+<body>
+
+
+  
+<div id="frame">
+ 
+
+
+<div id="menu" >
+
+<div id="leftpanel"  class="accordion" style="overflow-y: auto">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <h3>
+                        <a class="accordion-toggle"
+                            data-toggle="collapse"
+                            data-parent="#leftpanel"
+                            href="#search">
+                                Create an event
+                        </a>
+                        </h3>
+						
+                    </div>
+                    <div id="search" class="accordion-body collapse">   <!-- add
+                    the class "in" to make this one open by default -->
+                        <div
+                            class="accordion-inner">
+                            <p>
+                               
+
+								 <strong data-toggle="tooltip" title="Search a geographic feature below" style="color:green" >Enter a Location </strong>	 
+                                <form class="form-inline" id="bSearchFormNewEvent">
+									<div class="control-group">
+									<input type="text" id="inputCoords"  name="inputCoords" class="input-medium" placeholder="latitude,longitude or address" style="width: 100%">
+											 <select id="inputEvent" 
+										  class="my-combo" data-btn-class="btn-success" style="width: 200px">
+										  <option value="pleasechoose">--Please choose an event--</option>	
+								  </select>
+									<input type="text" id="inputMsg"   class="input-medium" placeholder="Enter a popup message" style="width: 100%">
+									</div>
+                                    <button type="submit" id="newEvent" class="btn">Share</button> 
+                                </form>
+			</br></br>
+
+										<div id="LoadingDiv" style="display:none; text-align: center">
+											
+										</div>															
+								<button id="bSearchClearM" class="btn">Clear All Temporary Markers</button>
+								</br></br>
+											<label class="radio">
+											<input type="checkbox"id="clickEnable">
+											<b>Enable/disable map click point creation</b>
+											</label>
+	
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+				
+			
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <h3>
+                        <a class="accordion-toggle"
+                            data-toggle="collapse"
+                            data-parent="#leftpanel"
+                            href="#mapLayers">
+                            Map Layers
+                        </a>
+                        </h3>
+                    </div>
+
+                    <div id="mapLayers" class="accordion-body collapse">
+                        <div class="accordion-inner">
+                            <div id="zoomAlert0" class="alert" style="display:
+                                none">
+                                Zoom in to activate your selected layer
+                            </div>
+
+
+   					 
+		
+                 <a  class="headTitle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><h4>Base Layers </h4>  <span class="caret" id="sp0"> </span> </a>
+                            
+				 <div id="collapseOne" class="accordion-body collapse">
+				<label class="radio">
+                                <input type="radio" ng-change="BaseLayer" name="base" id="osm" value="osm">
+                                OSM
+                            </label>
+				 <label class="radio">
+                                 <input type="radio" ng-change="BaseLayer" name="base" id="mq" value="mq">
+                                Map Quest
+                            </label>
+ 		
+				</div>
+					
+			  <div id="slider"><div class="ui-slider-handle"></div></div>
+			  <a  class="headTitle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><h4>Filter by event </h4>  <span class="caret" id="sp1"> </span> </a>
+				 <div id="collapseTwo" class="accordion-body collapse">
+				     <select id="evFilters" 
+					class="my-combo" data-btn-class="btn-success" style="width: 200px">
+					<option value="all">show all events</option>
+					</select> 
+			    
+				 
+				 </div>
+				 
+                         </div>
+                    </div>
+					
+
+
+                </div>
+
+ 
+        
+            </div>
+			
+			</div> <!--  end of slide menu   -->
+		
+        <div id="mainarea">
+		
+
+	
+            <div id="rightpanel">
+
+                <div id="map"> 
+				
+				
+				</div>
+				<div class="control-group">
+					<button id="GeoLocate" class="btn"style="color:blue;width:125px;	position: absolute;top: 35%;left: 5px;">Locate me </button>
+				</div>	
+  
+
+			
+				<div id="MapLoadingDiv" style="display:none; text-align: center">
+											
+										</div>	
+
+					
+				 <!--    <button  id="mapPrint" class="btn" >PRINT MAP</button> -->
+		
+				
+				<a id="menuLink" href="#menu" title="Click here to view menu options." ></a>
+				
+
+
+
+			
+			
+        </div>
+   </div>
+
+    </div><!--End of main frame-->
+	
+
+
+
+
+  </body>
+
+</html>
+
+
